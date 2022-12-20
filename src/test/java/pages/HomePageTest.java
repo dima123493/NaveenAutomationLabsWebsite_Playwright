@@ -1,26 +1,12 @@
 package pages;
 
-import com.microsoft.playwright.Page;
-import factory.PlaywrightFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import base.BaseTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class HomePageTest {
-
-    PlaywrightFactory playwrightFactory;
-    Page page;
-    HomePage homePage;
-
-    @BeforeTest
-    public void setUp() {
-        playwrightFactory = new PlaywrightFactory();
-        page = playwrightFactory.initialiseBrowser("chromium");
-        homePage = new HomePage(page);
-    }
+public class HomePageTest extends BaseTest {
 
     @Test
     public void homePageTitle() {
@@ -41,11 +27,6 @@ public class HomePageTest {
     public void searchProduct(String productName) {
         String actualSearchHeader = homePage.doSearch(productName);
         assertEquals(actualSearchHeader, "Search - " + productName);
-    }
-
-    @AfterTest
-    public void tearDown() {
-        page.context().browser().close();
     }
 
 }
